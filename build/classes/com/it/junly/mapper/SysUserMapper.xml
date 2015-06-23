@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.it.junly.mapper.SysUserMapper" >
+  
+  <resultMap id="BaseResultMap" type="com.it.junly.po.SysUser" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="department_key" property="departmentKey" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="last_logintime" property="lastLogintime" jdbcType="TIMESTAMP" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="SMALLINT" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  
+  <sql id="Base_Column_List" >
+    id, birthday, department_key, email, last_logintime, password, phone, role, sex, 
+    status, user_name
+  </sql>
+  
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.it.junly.po.SysUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <delete id="deleteByExample" parameterType="com.it.junly.po.SysUserExample" >
+    delete from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.it.junly.po.SysUser" >
+    insert into sys_user (id, birthday, department_key, 
+      email, last_logintime, password, 
+      phone, role, sex, 
+      status, user_name)
+    values (#{id,jdbcType=BIGINT}, #{birthday,jdbcType=DATE}, #{departmentKey,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{lastLogintime,jdbcType=TIMESTAMP}, #{password,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, #{sex,jdbcType=SMALLINT}, 
+      #{status,jdbcType=BIT}, #{userName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.it.junly.po.SysUser" >
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="departmentKey != null" >
+        department_key,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="lastLogintime != null" >
+        last_logintime,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="departmentKey != null" >
+        #{departmentKey,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogintime != null" >
+        #{lastLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.it.junly.po.SysUserExample" resultType="java.lang.Integer" >
+    select count(*) from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.departmentKey != null" >
+        department_key = #{record.departmentKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLogintime != null" >
+        last_logintime = #{record.lastLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.role != null" >
+        role = #{record.role,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=SMALLINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_user
+    set id = #{record.id,jdbcType=BIGINT},
+      birthday = #{record.birthday,jdbcType=DATE},
+      department_key = #{record.departmentKey,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      last_logintime = #{record.lastLogintime,jdbcType=TIMESTAMP},
+      password = #{record.password,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      role = #{record.role,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=SMALLINT},
+      status = #{record.status,jdbcType=BIT},
+      user_name = #{record.userName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.it.junly.po.SysUser" >
+    update sys_user
+    <set >
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="departmentKey != null" >
+        department_key = #{departmentKey,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogintime != null" >
+        last_logintime = #{lastLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.it.junly.po.SysUser" >
+    update sys_user
+    set birthday = #{birthday,jdbcType=DATE},
+      department_key = #{departmentKey,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      last_logintime = #{lastLogintime,jdbcType=TIMESTAMP},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=SMALLINT},
+      status = #{status,jdbcType=BIT},
+      user_name = #{userName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

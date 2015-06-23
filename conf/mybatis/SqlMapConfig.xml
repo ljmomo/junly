@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+ <!--  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/myhs?characterEncoding=utf-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+      </dataSource>
+    </environment>
+  </environments> -->
+  	<!-- 配置mapper
+	由于使用spring和mybatis的整合包进行mapper扫描，这里不需要配置了。
+	必须遵循：mapper.xml和mapper.java文件同名且在一个目录 
+	 -->
+  	<!-- 全局setting配置，根据需要添加 -->
+	<!-- 配置别名 -->
+	<typeAliases>
+		<!-- 批量扫描别名 -->
+		<package name="com.it.junly.po"/>
+	</typeAliases>
+  <!-- <mappers>
+    <mapper resource="sqlmap/User.xml"/>
+   <mapper resource="sqlmap/UserMapper.xml" />
+  </mappers> -->
+</configuration>
